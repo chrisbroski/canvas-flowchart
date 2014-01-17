@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Factorial Flowchart Example - Canvas Flowchart</title>
+<body>
+
+<div class="article">
+
+<h1>Factorial Flowchart Example</h1>
+<p><canvas id="flowchart" width="300" height="460" style="border: 1px solid #eee; "></canvas>
+
+</div>
+
+<script src="flowchart.js"></script>
+<script>
+/*jslint browser: true, sloppy: true */
+var canvas = document.getElementById("flowchart"),
+    ctx = canvas.getContext("2d");
+
+ctx.lineWidth = 1;
+ctx.strokeStyle = 'black';
+ctx.font = '12px sans-serif';
+
+ctx.beginPath();
+
+ctx.terminator(180.5, 30.5, 80, 15);
+ctx.fillText("Start", 205, 34.5);
+ctx.arrow(220.5, 45.5, 220.5, 75.5);
+
+ctx.parallelogram(165.5, 75.5, 110, 30);
+ctx.fillText("Read N", 200, 94.5);
+ctx.arrow(220.5, 105.5, 220.5, 135.5);
+
+ctx.rect(165.5, 135.5, 110, 40);
+ctx.fillText("M = 1", 205, 152.5);
+ctx.fillText("F = 1", 206, 167.5);
+ctx.arrow(220.5, 175.5, 220.5, 205.5);
+
+ctx.rect(165.5, 205.5, 110, 40);
+ctx.fillText("F = F * M", 198, 228.5);
+ctx.arrow(220.5, 245.5, 220.5, 275.5);
+
+ctx.diamond(165.5, 275.5, 110, 50);
+ctx.fillText("Is", 215, 293.5);
+ctx.fillText("M = N?", 203, 308.5);
+ctx.arrow(220.5, 325.5, 220.5, 355.5);
+
+ctx.parallelogram(165.5, 355.5, 110, 30);
+ctx.fillText("Print F", 200, 373.5);
+ctx.arrow(220.5, 385.5, 220.5, 415.5);
+ctx.fillText("YES", 228, 343.5);
+
+ctx.terminator(180.5, 430.5, 80, 15);
+ctx.fillText("End", 208, 433.5);
+
+ctx.arrow(165.5, 300.5, 135.5, 300.5);
+ctx.fillText("NO", 145, 295.5);
+
+ctx.rect(25.5, 280.5, 110, 40);
+ctx.fillText("M = M + 1", 52.5, 302.5);
+ctx.moveTo(80.5, 280.5);
+ctx.lineTo(80.5, 192);
+ctx.arrow(80.5, 192.5, 220.5, 192.5);
+
+ctx.stroke();
+
+</script>
