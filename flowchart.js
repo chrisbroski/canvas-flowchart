@@ -53,15 +53,19 @@
 
     CanvasRenderingContext2D.prototype.arrow = function drawArrow(startX, startY, stopX, stopY) {
         // I do not fully understand this trig but it seems to work.
-        var angle = Math.atan2(startY - stopY, stopX - startX) - Math.PI / 2;
+        var angle = Math.atan2(startY - stopY, stopX - startX) - Math.PI / 2,
+            arrowSize = 5,
+            stopX2 = stopX + 5 * Math.sin(angle),
+            stopY2 = stopY + 5 * Math.cos(angle);
 
         // line
         this.moveTo(startX, startY);
-        this.lineTo(stopX, stopY);
+        this.lineTo(stopX2, stopY2);
 
         // pointer
-        this.lineTo(stopX + 5 * Math.sin(angle + Math.PI / 6), stopY + 5 * Math.cos(angle + Math.PI / 6));
-        this.lineTo(stopX + 5 * Math.sin(angle - Math.PI / 6), stopY + 5 * Math.cos(angle - Math.PI / 6));
+        this.lineTo(stopX2 + arrowSize / 2 * Math.sin(angle - Math.PI / 2), stopY2 + arrowSize / 2 * Math.cos(angle - Math.PI / 2));
         this.lineTo(stopX, stopY);
+        this.lineTo(stopX2 - arrowSize / 2 * Math.sin(angle - Math.PI / 2), stopY2 - arrowSize / 2 * Math.cos(angle - Math.PI / 2));
+        this.lineTo(stopX2, stopY2);
     };
 }());
