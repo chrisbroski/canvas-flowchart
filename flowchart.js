@@ -26,6 +26,14 @@
         this.lineTo(x + w, y + h - h / 8);
     };
 
+    CanvasRenderingContext2D.prototype.storage = function drawStorage(x, y, w, h) {
+        this.moveTo(x, y + h);
+        this.arc(x, y, h, Math.PI * 0.5, Math.PI * 1.5, false);
+        this.lineTo(x + w, y - h);
+        this.arc(x + w, y, h, Math.PI * 1.5, Math.PI * 0.5, true);
+        this.closePath();
+    };
+
     CanvasRenderingContext2D.prototype.terminator = function drawTerminator(x, y, w, h) {
         this.moveTo(x, y + h);
         this.arc(x, y, h, Math.PI * 0.5, Math.PI * 1.5, false);
