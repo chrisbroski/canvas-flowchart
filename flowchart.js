@@ -1,6 +1,12 @@
 (function () {
     'use strict';
     /*global CanvasRenderingContext2D */
+    var lastPostion = [0, 0];
+
+    CanvasRenderingContext2D.prototype.process = function drawProcess(x, y, w, h) {
+        this.rect(x, y, w, h);
+        lastPostion = [x, y];
+    };
 
     CanvasRenderingContext2D.prototype.oval = function drawOval(x, y, w, h, arc) {
         var i, xPos, yPos;
@@ -13,9 +19,10 @@
 
             this.lineTo(xPos, yPos);
         }
+        lastPostion = [x, y];
     };
 
-    CanvasRenderingContext2D.prototype.cylinder = function drawCylinder(x, y, w, h) {
+    CanvasRenderingContext2D.prototype.db = function drawCylinder(x, y, w, h) {
         this.oval(x, y, w, h / 4);
         this.oval(x, y + h * 0.75, w, h / 4, Math.PI);
 
@@ -24,6 +31,7 @@
 
         this.moveTo(x + w, y + h / 8);
         this.lineTo(x + w, y + h - h / 8);
+        lastPostion = [x, y];
     };
 
     CanvasRenderingContext2D.prototype.storage = function drawStorage(x, y, w, h) {
@@ -32,6 +40,7 @@
         this.lineTo(x + w, y - h);
         this.arc(x + w, y, h, Math.PI * 1.5, Math.PI * 0.5, true);
         this.closePath();
+        lastPostion = [x, y];
     };
 
     CanvasRenderingContext2D.prototype.terminator = function drawTerminator(x, y, w, h) {
@@ -40,6 +49,7 @@
         this.lineTo(x + w, y - h);
         this.arc(x + w, y, h, Math.PI * 1.5, Math.PI * 0.5, false);
         this.closePath();
+        lastPostion = [x, y];
     };
 
     CanvasRenderingContext2D.prototype.diamond = function drawDiamond(x, y, w, h) {
@@ -48,15 +58,17 @@
         this.lineTo(x + w, y + h / 2);
         this.lineTo(x + w / 2, y + h);
         this.closePath();
+        lastPostion = [x, y];
     };
 
-    CanvasRenderingContext2D.prototype.parallelogram = function drawParallelogram(x, y, w, h) {
+    CanvasRenderingContext2D.prototype.io = function drawParallelogram(x, y, w, h) {
         // This is a poor hack that needs to be done with a standard (or defined in the function argument) angle
         this.moveTo(x + w * 0.1, y);
         this.lineTo(x + w, y);
         this.lineTo(x + w * 0.9, y + h);
         this.lineTo(x, y + h);
         this.closePath();
+        lastPostion = [x, y];
     };
 
     CanvasRenderingContext2D.prototype.arrow = function drawArrow(startX, startY, stopX, stopY) {
@@ -78,5 +90,9 @@
         this.lineTo(stopX, stopY);
         this.lineTo(stopX2 - stopXDiff, stopY2 - stopYDiff);
         this.lineTo(stopX2, stopY2);
+    };
+
+    CanvasRenderingContext2D.prototype.relText = function drawRelText(text, x, y) {
+        this.fillText(text, x + lastPostion[0], y + lastPostion[1]);
     };
 }());

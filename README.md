@@ -10,7 +10,7 @@ For an example of how it is used, see the factorial-flowchart.html file.
 IE 8
 ----
 
-If you want to use this in slightly older browsers, I have used the [excanvas](https://github.com/yinso/excanvas/blob/master/excanvas.js) library. successfully.
+If you want to use this in slightly older browsers, I have used the [excanvas](https://github.com/yinso/excanvas/blob/master/excanvas.js) library successfully.
 
 coodinates.js
 -------------
