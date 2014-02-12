@@ -8,47 +8,83 @@
         lastPostion = [x, y];
     };
 
-    CanvasRenderingContext2D.prototype.oval = function drawOval(x, y, w, h, arc) {
-        var i, xPos, yPos;
-        arc = arc || 2 * Math.PI;
+    CanvasRenderingContext2D.prototype.oval = function drawOval(x, y, w, h, start, end) {
+        var i, xPos, yPos, firstPoint = true;
+        end = end || 2 * Math.PI;
+        start = start || 0.001;
 
-        this.moveTo(x, y + h / 2);
-        for (i = 0.001; i < arc; i += 0.001) {
+        for (i = start; i < end; i += 0.001) {
             xPos = (x + w / 2) - (w / 2 * Math.cos(i));
             yPos = (y + h / 2) + (h / 2 * Math.sin(i));
 
-            this.lineTo(xPos, yPos);
+            if (firstPoint) {
+                this.moveTo(xPos, yPos);
+                firstPoint = false;
+            } else {
+                this.lineTo(xPos, yPos);
+            }
         }
         lastPostion = [x, y];
     };
 
     CanvasRenderingContext2D.prototype.db = function drawCylinder(x, y, w, h) {
         this.oval(x, y, w, h / 4);
-        this.oval(x, y + h * 0.75, w, h / 4, Math.PI);
+        this.oval(x, y + h * 0.75, w, h / 4, 0, Math.PI);
 
         this.moveTo(x, y + h / 8);
         this.lineTo(x, y + h - h / 8);
 
         this.moveTo(x + w, y + h / 8);
         this.lineTo(x + w, y + h - h / 8);
+
+        lastPostion = [x, y];
+    };
+
+    CanvasRenderingContext2D.prototype.drive = function drawSidewaysCylinder(x, y, w, h) {
+        this.oval(x, y, h / 2, h, Math.PI * 1.5, Math.PI * 2.5);
+        this.oval(x + w, y, h / 2, h);
+
+        this.moveTo(x + h / 4, y);
+        this.lineTo(x + h / 4 + w, y);
+
+        this.moveTo(x + h / 4, y + h);
+        this.lineTo(x + w + h / 4, y + h);
+
+        lastPostion = [x, y];
+    };
+
+    CanvasRenderingContext2D.prototype.display = function drawDisplay(x, y, w, h) {
+        this.oval(x + w, y, h / 2, h, Math.PI * 0.5, Math.PI * 1.5);
+
+        this.moveTo(x + w + h / 4, y);
+        this.lineTo(x + h / 4, y);
+        this.lineTo(x, y + h / 2);
+        this.lineTo(x + h / 4, y + h);
+        this.lineTo(x + w + h / 4, y + h);
+
+        lastPostion = [x, y];
+    };
+
+    CanvasRenderingContext2D.prototype.roundedBox = function drawRoundedBox(x, y, w, h, leftType, rightType) {
+        leftType = leftType || false;
+        rightType = rightType || false;
+
+        this.moveTo(x, y + h);
+        this.arc(x, y, h, Math.PI * 0.5, Math.PI * 1.5, leftType);
+        this.lineTo(x + w, y - h);
+        this.arc(x + w, y, h, Math.PI * 1.5, Math.PI * 0.5, rightType);
+        this.closePath();
+
         lastPostion = [x, y];
     };
 
     CanvasRenderingContext2D.prototype.storage = function drawStorage(x, y, w, h) {
-        this.moveTo(x, y + h);
-        this.arc(x, y, h, Math.PI * 0.5, Math.PI * 1.5, false);
-        this.lineTo(x + w, y - h);
-        this.arc(x + w, y, h, Math.PI * 1.5, Math.PI * 0.5, true);
-        this.closePath();
+        this.roundedBox(x, y, w, h, false, true);
         lastPostion = [x, y];
     };
 
     CanvasRenderingContext2D.prototype.terminator = function drawTerminator(x, y, w, h) {
-        this.moveTo(x, y + h);
-        this.arc(x, y, h, Math.PI * 0.5, Math.PI * 1.5, false);
-        this.lineTo(x + w, y - h);
-        this.arc(x + w, y, h, Math.PI * 1.5, Math.PI * 0.5, false);
-        this.closePath();
+        this.roundedBox(x, y, w, h, false, false);
         lastPostion = [x, y];
     };
 
@@ -58,6 +94,7 @@
         this.lineTo(x + w, y + h / 2);
         this.lineTo(x + w / 2, y + h);
         this.closePath();
+
         lastPostion = [x, y];
     };
 
@@ -68,12 +105,13 @@
         this.lineTo(x + w * 0.9, y + h);
         this.lineTo(x, y + h);
         this.closePath();
+
         lastPostion = [x, y];
     };
 
     CanvasRenderingContext2D.prototype.arrow = function drawArrow(startX, startY, stopX, stopY) {
-        // I do not fully understand this trig but it seems to work.
         var rightAngle = Math.PI / 2,
+            // I do not fully understand this trig but it seems to work.
             angle = Math.atan2(startY - stopY, stopX - startX) - rightAngle,
             arrowSize = 5,
             stopX2 = stopX + 5 * Math.sin(angle),
