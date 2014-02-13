@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Alignment - Canvas Flowchart</title>
+<style type="text/css">
+body {background: #eee; font-family: sans-serif; }
+#flowchart {background: #fff; }
+</style>
+<body>
+
+<div class="article">
+
+<h1>Alignment</h1>
+<p><canvas id="flowchart" width="1000" height="460"></canvas>
+</div>
+
+<script src="../flowchart.js"></script>
+<!--<script src="../coordinates.js"></script>-->
+<script>
+/*jslint browser: true, sloppy: true */
+var canvas = document.getElementById("flowchart"),
+    ctx = canvas.getContext("2d");
+
+ctx.lineWidth = 1;
+ctx.strokeStyle = 'black';
+ctx.font = '12px sans-serif';
+
+ctx.beginPath();
+
+ctx.process(10, 10, 100, 30);
+ctx.decision(10, 60, 100, 30);
+ctx.io(10, 110, 100, 30);
+ctx.oval(10, 160, 100, 30);
+ctx.db(10, 210, 100, 30);
+ctx.drive(10, 260, 100, 30);
+ctx.storage(10, 310, 100, 30);
+ctx.display(10, 360, 100, 30);
+ctx.terminator(10, 410, 100, 30);
+
+ctx.decision(120, 10, 100, 30);
+ctx.io(230, 10, 100, 30);
+ctx.oval(340, 10, 100, 30);
+ctx.db(450, 10, 100, 30);
+ctx.drive(560, 10, 100, 30);
+ctx.storage(670, 10, 100, 30);
+ctx.display(780, 10, 100, 30);
+ctx.terminator(890, 10, 100, 30);
+
+ctx.stroke();
+
+</script>
