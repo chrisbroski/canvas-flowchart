@@ -13,7 +13,7 @@ body {background: #eee; font-family: sans-serif; }
 
 <h1>All Methods Test</h1>
 <p>Runs each flowchart.js method 4 times in slightly different ways for quick checking and profiling.
-<p><canvas id="flowchart" width="600" height="460"></canvas>
+<p><canvas id="flowchart" width="600" height="600"></canvas>
 </div>
 
 <script src="../flowchart.js"></script>
@@ -30,12 +30,7 @@ ctx.font = '12px sans-serif';
 ctx.beginPath();
 
 // terminator
-ctx.fillText("terminator", 27, 34.5);/*
-ctx.terminator(15.5, 20.5, 100, 30);
-ctx.terminator(160.5, 50.5, 80, 45);
-ctx.terminator(200.5, 30.5, 0, 15);
-ctx.terminator(320.5, 30.5, 200, 25);*/
-
+ctx.fillText("terminator", 27, 34.5);
 ctx.terminator(15.5, 20.5, 110, 30);
 ctx.terminator(135.5, 20.5, 70, 50);
 ctx.terminator(155.5, 30.5, 10, 10);
@@ -56,7 +51,7 @@ ctx.decision(155.5, 150.5, 10, 10);
 ctx.decision(175.5, 165.5, 350, 20);
 
 //parallelogram
-ctx.fillText("I/O", 37, 238);
+ctx.fillText("I/O", 65, 238);
 ctx.io(20.5, 210.5, 110, 50);
 ctx.io(150.5, 210.5, 10, 50);
 ctx.io(170.5, 210.5, 50, 50);
@@ -75,6 +70,27 @@ ctx.db(20.5, 330.5, 110, 50);
 ctx.db(140.5, 330.5, 10, 50);
 ctx.db(160.5, 330.5, 50, 50);
 ctx.db(220.5, 330.5, 300, 10);
+
+//storage
+ctx.fillText("storage", 55, 415);
+ctx.storage(20.5, 390.5, 110, 50);
+ctx.storage(140.5, 390.5, 10, 50);
+ctx.storage(160.5, 390.5, 50, 50);
+ctx.storage(220.5, 390.5, 300, 10);
+
+//drive
+ctx.fillText("hard drive", 35, 475);
+ctx.drive(20.5, 450.5, 110, 50);
+ctx.drive(140.5, 450.5, 10, 50);
+ctx.drive(160.5, 450.5, 50, 50);
+ctx.drive(220.5, 450.5, 300, 10);
+
+//display
+ctx.fillText("display", 35, 535);
+ctx.display(20.5, 510.5, 110, 50);
+ctx.display(140.5, 510.5, 10, 50);
+ctx.display(160.5, 510.5, 50, 50);
+ctx.display(220.5, 510.5, 300, 10);
 
 ctx.stroke();
 
