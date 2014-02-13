@@ -42,53 +42,50 @@
 
     CanvasRenderingContext2D.prototype.drive = function drawSidewaysCylinder(x, y, w, h) {
         this.oval(x, y, h / 2, h, Math.PI * 1.5, Math.PI * 2.5);
-        this.oval(x + w, y, h / 2, h);
+        this.oval(x + w - h / 2, y, h / 2, h);
 
         this.moveTo(x + h / 4, y);
-        this.lineTo(x + h / 4 + w, y);
+        this.lineTo(x + w - h / 4, y);
 
         this.moveTo(x + h / 4, y + h);
-        this.lineTo(x + w + h / 4, y + h);
+        this.lineTo(x + w - h / 4, y + h);
 
         lastPostion = [x, y];
     };
 
     CanvasRenderingContext2D.prototype.display = function drawDisplay(x, y, w, h) {
-        this.oval(x + w, y, h / 2, h, Math.PI * 0.5, Math.PI * 1.5);
+        this.oval(x + w - h / 2, y, h / 2, h, Math.PI * 0.5, Math.PI * 1.5);
 
-        this.moveTo(x + w + h / 4, y);
+        this.moveTo(x + w - h / 4, y);
         this.lineTo(x + h / 4, y);
         this.lineTo(x, y + h / 2);
         this.lineTo(x + h / 4, y + h);
-        this.lineTo(x + w + h / 4, y + h);
-
-        lastPostion = [x, y];
-    };
-
-    CanvasRenderingContext2D.prototype.roundedBox = function drawRoundedBox(x, y, w, h, leftType, rightType) {
-        leftType = leftType || false;
-        rightType = rightType || false;
-
-        this.moveTo(x, y + h);
-        this.arc(x, y, h, Math.PI * 0.5, Math.PI * 1.5, leftType);
-        this.lineTo(x + w, y - h);
-        this.arc(x + w, y, h, Math.PI * 1.5, Math.PI * 0.5, rightType);
-        this.closePath();
+        this.lineTo(x + w - h / 4, y + h);
 
         lastPostion = [x, y];
     };
 
     CanvasRenderingContext2D.prototype.storage = function drawStorage(x, y, w, h) {
-        this.roundedBox(x, y, w, h, false, true);
+        this.moveTo(x + h / 2, y + h);
+        this.arc(x + h / 2, y + h / 2, h / 2, Math.PI * 0.5, Math.PI * 1.5, false);
+        this.lineTo(x + w, y);
+        this.arc(x + w, y + h / 2, h / 2, Math.PI * 1.5, Math.PI * 0.5, true);
+        this.closePath();
+
         lastPostion = [x, y];
     };
 
     CanvasRenderingContext2D.prototype.terminator = function drawTerminator(x, y, w, h) {
-        this.roundedBox(x, y, w, h, false, false);
+        this.moveTo(x + h / 2, y + h);
+        this.arc(x + h / 2, y + h / 2, h / 2, Math.PI * 0.5, Math.PI * 1.5, false);
+        this.lineTo(x + w - h / 2, y);
+        this.arc(x + w - h / 2, y + h / 2, h / 2, Math.PI * 1.5, Math.PI * 0.5, false);
+        this.closePath();
+
         lastPostion = [x, y];
     };
 
-    CanvasRenderingContext2D.prototype.diamond = function drawDiamond(x, y, w, h) {
+    CanvasRenderingContext2D.prototype.decision = function drawDiamond(x, y, w, h) {
         this.moveTo(x, y + h / 2);
         this.lineTo(x + w / 2, y);
         this.lineTo(x + w, y + h / 2);
